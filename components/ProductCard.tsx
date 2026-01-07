@@ -10,10 +10,11 @@ import {
 import { Product } from "@/types/typeProducts"
 import { Button } from "./ui/button"
 import Image from "next/image"
+import Link from "next/link"
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <Card className='w-full pt-0  '>
+    <Card className='w-full pt-0 rounded-t-2xl overflow-hidden shadow-xl'>
       <CardHeader className='w-full px-0 '>
         <div className='w-full flex items-center justify-center '>
         <Image
@@ -25,6 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           alt={product.name}
           width={333}
           height={399}
+          className='rounded-t-2xl'
         />
         </div>
         <CardTitle className='px-4 '>
@@ -39,7 +41,9 @@ const ProductCard = ({ product }: { product: Product }) => {
       </CardContent>
       <CardFooter className='flex items-center justify-between'>
         <CardAction>${product.price.toFixed(2)}</CardAction>
-        <Button>Add to Cart</Button>
+        <Button asChild className='cursor-pointer rounded-xl'>
+          <Link href={`/product/${product._id}`}>View Product</Link>
+        </Button>
       </CardFooter>
     </Card>
   )

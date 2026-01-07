@@ -25,7 +25,7 @@ const HeroSection = () => {
               asChild
               className='h-12 px-4 cursor-pointer text-2xl rounded-r-xl'
             >
-              <Link href='/shop'>Shop Now</Link>
+              <Link href='/collections'>Shop Now</Link>
             </Button>
           </ButtonGroup>
         </ButtonGroup>

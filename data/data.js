@@ -1,3 +1,5 @@
+const discount = 0.7
+
 export const Products = [
   {
     _id: "69259cd9bc23937fb2f93b80",
@@ -6,7 +8,7 @@ export const Products = [
     description:
       "This lightweight cotton top is perfect for casual outings, featuring a relaxed fit and durable material that ensures long-lasting wear. Crafted from high-quality, breathable cotton, it provides all-day comfort for errands, meetings, or leisure. The round neck adds elegance, versatile for pairing with jeans or skirts. Machine washable and fade-resistant, it's a wardrobe staple that flatters all body types.",
     price: 25,
-    offerPrice: 15,
+    offerPrice: 25*discount,
     images: ["/images/product_1.png"],
     category: "Women",
     date: "1764072665778",
@@ -21,7 +23,7 @@ export const Products = [
     description:
       "A premium wool sweater offering exceptional comfort and warmth, great for winter layering and cozy days. Made from soft wool that regulates temperature, ideal for outdoors or office. Features ribbed cuffs for fit, smooth texture without itch. Pairs with jeans or chinos in neutral tones. Gentle wash or dry clean to retain shape and softness.",
     price: 20,
-    offerPrice: 10,
+    offerPrice: 20*discount,
     images: ["/images/product_2.png"],
     category: "Men",
     date: "1764072781890",
@@ -36,8 +38,8 @@ export const Products = [
     description:
       "Soft cotton top for women, ideal for active days and relaxation, providing ultimate comfort. From pure cotton that's breathable and moisture-wicking, keeps you cool during workouts or lounging. Styles easily with leggings or pants for outings or home. Reinforced seams for durability, withstands washing without fading. Available in sizes and patterns for perfect fit.",
     price: 25,
-    offerPrice: 15,
-    images: ["/images/product_3_1.png","/images/product_3_2.png","/images/product_3_3.png","/images/product_3_4.png",],
+    offerPrice: 25*discount,
+    images: ["/images/product_3_1.png"],
     category: "Women",
     date: "1764073037054",
     subCategory: "Topwear",
@@ -51,7 +53,7 @@ export const Products = [
     description:
       "A casual t-shirt made from breathable cotton, suitable for any informal occasion, offering versatility. Soft, pre-shrunk fabric maintains fit after washes. Crew neck and short sleeves for timeless look, layers under jackets. Pairs with denim or joggers for meetups or strolls. Classic colors, tag-free for no irritation.",
     price: 25,
-    offerPrice: 15,
+    offerPrice: 25*discount,
     images: ["/images/product_4.png"],
     category: "Women",
     date: "1764073859250",
@@ -66,7 +68,7 @@ export const Products = [
     description:
       "An everyday essential knit sweater for women, offering simplicity and warmth for cooler months. From soft yarns for insulation without bulk, layers over blouses. Relaxed silhouette for movement, suitable for office or outings. Ribbed edges, versatile neckline for styling. Machine washable, maintains texture and color.",
     price: 20,
-    offerPrice: 10,
+    offerPrice: 20*discount,
     images: ["/images/product_5.png"],
     category: "Women",
     date: "1764073924797",
@@ -81,7 +83,7 @@ export const Products = [
     description:
       "Fun and vibrant graphic hoodie, perfect for women's casual wear and chilly days, with practical warmth. Fleece-lined for heat, eye-catching graphics add personality. Drawstring hood and pocket for function. Relaxed fit for layering, ideal for adventures or gym. Bold colors, machine washable, retains softness.",
     price: 15,
-    offerPrice: 10,
+    offerPrice: 15*discount,
     images: ["/images/product_6.png"],
     category: "Women",
     date: "1764073961618",
@@ -96,7 +98,7 @@ export const Products = [
     description:
       "Comfortable, lightweight trousers ideal for casual wear any season, with versatility. Soft fabric drapes elegantly, elastic waist for fit. Pairs with tops or sweaters, wrinkle-resistant for polish. Side pockets, straight-leg design flatters shapes. Machine washable, in lengths and colors.",
     price: 25,
-    offerPrice: 10,
+    offerPrice: 25*discount,
     images: ["/images/product_7.png"],
     category: "Women",
     date: "1764074011321",
@@ -111,7 +113,7 @@ export const Products = [
     description:
       "Warm and comfortable hoodie with adjustable hood and pockets, for women's winter activities. Plush material retains heat for walks or relaxation. Drawstring for coverage, kangaroo pockets for warmth. Pairs with jeans or leggings casually. Range of sizes and hues, reinforced for lasting.",
     price: 20,
-    offerPrice: 15,
+    offerPrice: 20*discount,
     images: ["/images/product_8.png"],
     category: "Women",
     date: "1764074581999",
@@ -126,7 +128,7 @@ export const Products = [
     description:
       "A casual hoodie for women, soft material for all-day comfort in relaxed activities. Fleece-lined for warmth, ideal for lounging or pursuits. Pullover with hood and cuffs to seal coziness. Minimalist for accessories, flattering fit. Washable, resistant to pilling.",
     price: 30,
-    offerPrice: 20,
+    offerPrice: 30*discount,
     images: ["/images/product_9.png"],
     category: "Women",
     date: "1764081849698",
@@ -141,7 +143,7 @@ export const Products = [
     description:
       "High-waisted joggers for casual wear, relaxed fit for comfort in activities. Flexible fabric wicks moisture, tapered legs with cuffs. Drawstring and pockets for practicality. Durable for use and washing. Versatile colors, pairs with tees or hoodies.",
     price: 30,
-    offerPrice: 25,
+    offerPrice: 30*discount,
     images: ["/images/product_10.png"],
     category: "Men",
     date: "1764081880641",
@@ -156,7 +158,7 @@ export const Products = [
     description:
       "Durable slim fit shirt for casual or formal, polished look. Wrinkle-resistant fabric, button-down collar, long sleeves. Contoured fit for silhouette, for meetings or events. Quality buttons, seams for wear. Classic patterns, elevates ensembles.",
     price: 15,
-    offerPrice: 10,
+    offerPrice: 15*discount,
     images: ["/images/product_11.png"],
     category: "Men",
     date: "1764081934381",
@@ -171,7 +173,7 @@ export const Products = [
     description:
       "Comfortable t-shirt for active kids, soft fabric for play or outings. Breathable cotton, hypoallergenic, tagless. Allows movement, wicks sweat for coolness. Vibrant colors resist fading. Sized for growth, washable and quick-drying.",
     price: 20,
-    offerPrice: 14,
+    offerPrice: 20*discount,
     images: ["/images/product_12.png"],
     category: "Kids",
     date: "1764081996114",
@@ -186,7 +188,7 @@ export const Products = [
     description:
       "Trendy skinny blouse pairs with bottoms for chic look in settings. Stretchable fabric accentuates, flexible. Detailing like buttons for sophistication. Sleek for day to night. Breathable, resists wrinkles. Assortment of colors for staple.",
     price: 20,
-    offerPrice: 15,
+    offerPrice: 20*discount,
     images: ["/images/product_13.png"],
     category: "Women",
     date: "1764082037439",
@@ -201,7 +203,7 @@ export const Products = [
     description:
       "Rugged cargo shirt with pockets for adventures, practical for kids. Tear-resistant fabric for play. Button-up, roll-up sleeves for weather. Cleanable, retains structure. Earthy tones for style and function.",
     price: 25,
-    offerPrice: 20,
+    offerPrice: 25*discount,
     images: ["/images/product_14.png"],
     category: "Kids",
     date: "1764082077438",
@@ -216,7 +218,7 @@ export const Products = [
     description:
       "Elastic waist shorts for active men, for activities like hiking. Quick-drying, UV protection. Adjustable waist, pockets for gear. Durable for terrain and washing. Versatile for gym or beach, in colors.",
     price: 25,
-    offerPrice: 15,
+    offerPrice: 25*discount,
     images: ["/images/product_15.png"],
     category: "Men",
     date: "1764082267435",
@@ -231,7 +233,7 @@ export const Products = [
     description:
       "Soft floral print shirt for comfort and style in settings. Lightweight fabric with patterns for personality. Button-front, collar for versatility. Reinforced, wrinkle-resistant. Multiple sizes and variations for outfits.",
     price: 15,
-    offerPrice: 10,
+    offerPrice: 15*discount,
     images: ["/images/product_16.png"],
     category: "Men",
     date: "1764082295089",
@@ -246,7 +248,7 @@ export const Products = [
     description:
       "Stylish puffer pants for warmth in weather, insulation for activities. Down alternative, water-resistant shell. Elastic waist, cuffs for fit. Compact, durable stitching. Neutral colors for style.",
     price: 20,
-    offerPrice: 15,
+    offerPrice: 20*discount,
     images: ["/images/product_17.png"],
     category: "Men",
     date: "1764082330979",
@@ -261,7 +263,7 @@ export const Products = [
     description:
       "Timeless trench coat tailored fit, protection for occasions. Weather-resistant, removable lining. Double-breasted, belted for look. Coverage with cuffs, pockets. Traditional shades for elegance.",
     price: 20,
-    offerPrice: 15,
+    offerPrice: 20*discount,
     images: ["/images/product_18.png"],
     category: "Men",
     date: "1764082573221",
@@ -276,7 +278,7 @@ export const Products = [
     description:
       "Warm parka durable for cold, for play and adventures. Padded, fleece-lined, hooded with trim. Reflective, pockets for safety. Waterproof, adjustable fit. Cleanable for winter coziness.",
     price: 15,
-    offerPrice: 10,
+    offerPrice: 15*discount,
     images: ["/images/product_19.png"],
     category: "Kids",
     date: "1764082610087",
@@ -291,7 +293,7 @@ export const Products = [
     description:
       "Versatile denim trousers for seasons, pairing with tops. Stretch-denim, shape retention. Five-pocket, straight-leg for appeal. Comfort mid-rise flatters. Fade-resistant, in washes and sizes.",
     price: 20,
-    offerPrice: 15,
+    offerPrice: 20*discount,
     images: ["/images/product_20.png"],
     category: "Women",
     date: "1764082664282",

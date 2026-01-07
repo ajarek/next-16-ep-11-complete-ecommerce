@@ -59,7 +59,7 @@ const Navbar = async () => {
         <ModeToggle />
         <SignedOut>
           <SignInButton>
-            <Button size='icon' className='cursor-pointer rounded-xl'>
+            <Button size='icon' className='bg-secondary cursor-pointer rounded-xl'>
               <LogIn className='w-5 h-5 ' />
             </Button>
           </SignInButton>
