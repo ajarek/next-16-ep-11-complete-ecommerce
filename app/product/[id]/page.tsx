@@ -11,7 +11,7 @@ const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     return <div>Product not found</div>
   }
   return (
-    <div className=' min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-8 max-sm:px-4 pb-8 gap-8 '>
+    <div className=' min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-8 max-sm:px-4 gap-8 '>
       <div className='w-full  grid grid-cols-1 md:grid-cols-2 place-items-center gap-8'>
         <div className='relative p-4'>
           <Image

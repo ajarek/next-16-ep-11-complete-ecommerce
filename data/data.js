@@ -4,7 +4,7 @@ export const Products = [
   {
     _id: "69259cd9bc23937fb2f93b80",
     userId: "user_35sUr0gOkatUxT9F55XMGURcNeJ",
-    name: "Elegant Cotton Round Neck Top",
+    name: "Elegant Cotton Neck Top",
     description:
       "This lightweight cotton top is perfect for casual outings, featuring a relaxed fit and durable material that ensures long-lasting wear. Crafted from high-quality, breathable cotton, it provides all-day comfort for errands, meetings, or leisure. The round neck adds elegance, versatile for pairing with jeans or skirts. Machine washable and fade-resistant, it's a wardrobe staple that flatters all body types.",
     price: 25,
@@ -289,7 +289,7 @@ export const Products = [
   {
     _id: "6925c3e8bc23937fb2f93bb4",
     userId: "user_35sUr0gOkatUxT9F55XMGURcNeJ",
-    name: "Women Classic Denim Trouser",
+    name: "Women Classic Trouser",
     description:
       "Versatile denim trousers for seasons, pairing with tops. Stretch-denim, shape retention. Five-pocket, straight-leg for appeal. Comfort mid-rise flatters. Fade-resistant, in washes and sizes.",
     price: 20,

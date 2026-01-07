@@ -26,7 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           alt={product.name}
           width={333}
           height={399}
-          className='rounded-t-2xl'
+          className='w-full rounded-t-2xl'
         />
         </div>
         <CardTitle className='px-4 '>
