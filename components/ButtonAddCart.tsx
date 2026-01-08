@@ -4,7 +4,7 @@ import { useCartStore } from "@/store/cartStore"
 import { useRouter } from "next/navigation"
 import type { Product } from "@/types/typeProducts"
 import { toast } from "sonner"
-import { Handbag, ShoppingBag } from "lucide-react"
+import { Handbag } from "lucide-react"
 import { Button } from "./ui/button"
 
 const ButtonAddCart = ({ product }: { product: Product }) => {
@@ -44,8 +44,8 @@ const ButtonAddCart = ({ product }: { product: Product }) => {
           category,
           date,
           subCategory,
-          popular: false, 
-          new: false, 
+          popular: false,
+          new: false,
           quantity,
         })
 

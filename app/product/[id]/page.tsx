@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import ProductCard from "@/components/ProductCard"
 import ButtonAddCart from "@/components/ButtonAddCart"
-import { ShoppingBag, ShoppingCart } from "lucide-react"
+import { ShoppingCart } from "lucide-react"
 
 const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params

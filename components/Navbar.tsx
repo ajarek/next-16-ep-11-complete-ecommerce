@@ -12,7 +12,8 @@ import { Handbag, LogIn, UserRoundPen } from "lucide-react"
 import { Button } from "./ui/button"
 import { auth } from "@clerk/nextjs/server"
 import MobileNavbar from "./MobileNavbar"
-import Image from "next/image"
+import LengthCart from "./LengthCart"
+
 
 const Navbar = async () => {
   const { isAuthenticated } = await auth()
@@ -52,10 +53,10 @@ const Navbar = async () => {
       </div>
       <div className='flex items-center gap-8 '>
         <MobileNavbar isAuthenticated={!!isAuthenticated} />
-        <div className='relative'>
+        <Link href='/cart' className='relative'>
           <Handbag />
-          <span className='absolute -top-2 -right-3 w-5 h-5 bg-primary text-white flex items-center justify-center rounded-full'>0</span>
-        </div>
+          <span className='absolute -top-2 -right-3 flex items-center justify-center rounded-full'><LengthCart /></span>
+        </Link>
         <ModeToggle />
         <SignedOut>
           <SignInButton>
