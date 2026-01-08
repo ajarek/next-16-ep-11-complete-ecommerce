@@ -3,10 +3,13 @@ import { Products } from "@/data/data.js"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import ProductCard from "@/components/ProductCard"
+import ButtonAddCart from "@/components/ButtonAddCart"
+import { ShoppingBag, ShoppingCart } from "lucide-react"
 
 const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
   const product = Products.find((product) => product._id === id)
+  const quantity = 1
   if (!product) {
     return <div>Product not found</div>
   }
@@ -45,15 +48,16 @@ const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             </p>
           </div>
           <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4'>
-            <Button className='bg-primary text-white px-4 py-2 rounded-xl hover:bg-primary/80 transition-colors cursor-pointer '>
-              Add to Cart
-            </Button>
             <Button
               asChild
-              className='bg-secondary text-white px-4 py-2 rounded-xl hover:bg-secondary/80 transition-colors cursor-pointer '
-            >
+              className='bg-primary text-white px-4 py-2 rounded-xl hover:bg-primary/80 transition-colors cursor-pointer '
+            > 
+            <div className="flex items-center gap-2">
+            <ShoppingCart className='w-4 h-4' />
               <Link href='/collections'>Buy Now</Link>
+            </div>
             </Button>
+            <ButtonAddCart product={{ ...product, quantity }} />
           </div>
         </div>
       </div>
@@ -65,12 +69,13 @@ const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           range of options to suit your preferences.
         </p>
         <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 place-items-center'>
-          {Products
-          .filter((productRelated) => productRelated.category === product.category)
-          .slice(0, 5)
-          .map((productRelated) => (
-            <ProductCard key={productRelated._id} product={productRelated} />
-          ))}
+          {Products.filter(
+            (productRelated) => productRelated.category === product.category
+          )
+            .slice(0, 5)
+            .map((productRelated) => (
+              <ProductCard key={productRelated._id} product={productRelated} />
+            ))}
         </div>
       </div>
     </div>

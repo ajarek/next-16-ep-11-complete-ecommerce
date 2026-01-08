@@ -11,4 +11,5 @@ export type Product = {
     subCategory: string;
     popular: boolean;
     new: boolean;
+    quantity?: number;
 }
