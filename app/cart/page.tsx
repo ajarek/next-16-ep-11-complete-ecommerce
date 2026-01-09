@@ -1,5 +1,7 @@
 "use client"
 
+import { useSyncExternalStore } from "react"
+
 import { useCartStore } from "@/store/cartStore"
 import LengthCart from "@/components/LengthCart"
 import Image from "next/image"
@@ -15,12 +17,31 @@ import {
 import { Button } from "@/components/ui/button"
 import { Minus, Plus, Trash2, Undo2 } from "lucide-react"
 import Link from "next/link"
+import { useUser } from "@clerk/nextjs"
 
 const taxRate = 23
 const shipping = 5
 
 const Cart = () => {
-  const { items, removeItemFromCart, increment, decrement, total } = useCartStore()
+  const { user } = useUser()
+
+  const {
+    items: storeItems,
+    removeItemFromCart,
+    increment,
+    decrement,
+    total: storeTotal,
+  } = useCartStore()
+  //This correctly identifies the client environment without triggering the "setState in effect" warning and is the recommended React 18+ approach for handling store environment synchronization.
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
+
+  const items = isClient ? storeItems : []
+  const total = () => (isClient ? storeTotal() : 0)
+
   return (
     <div className=' min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-8 max-sm:px-4 gap-8 '>
       <div className='w-full h-[calc(100vh-4rem)] grid grid-cols-1 md:grid-cols-[2fr_1fr] place-items-center gap-8 border-4'>
@@ -31,10 +52,15 @@ const Cart = () => {
             <span className='text-primary'>items</span>
           </div>
           <Table>
-            <TableCaption className='text-left'><Link href="/collections" className="flex items-center gap-2 text-primary">
-            <Undo2 className="w-5 h-5" />
-            Continue Shopping
-            </Link></TableCaption>
+            <TableCaption className='text-left'>
+              <Link
+                href='/collections'
+                className='flex items-center gap-2 text-primary'
+              >
+                <Undo2 className='w-5 h-5' />
+                Continue Shopping
+              </Link>
+            </TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead>Product Details</TableHead>
@@ -96,23 +122,84 @@ const Cart = () => {
             </TableBody>
           </Table>
         </div>
-        <div className='w-full h-full border-4 p-4 border-green-500'>
+        <div className='w-full h-full border-4 p-4 border-green-500 flex flex-col gap-4'>
           <h1 className='text-2xl font-semibold'>Order Summary</h1>
-          <div className='flex items-center justify-between'>
-            <span>Subtotal</span>
-            <span>${total().toFixed(2)}</span>
+          <div>
+            <h2 className='text-xl uppercase'>Shipping Address</h2>
+            {user?.publicMetadata.country ||
+            user?.publicMetadata.city ||
+            user?.publicMetadata.zipcode ||
+            user?.publicMetadata.street ||
+            user?.publicMetadata.phone ? (
+              <>
+                <p className='flex items-center gap-2 text-muted-foreground'>
+                  Country:{" "}
+                  <span className='text-primary'>
+                    {user?.publicMetadata.country as string}
+                  </span>
+                </p>
+
+                <p className='flex items-center gap-2 text-muted-foreground'>
+                  City:{" "}
+                  <span className='text-primary'>
+                    {user?.publicMetadata.city as string}
+                  </span>
+                </p>
+                <p className='flex items-center gap-2 text-muted-foreground'>
+                  Zipcode:{" "}
+                  <span className='text-primary'>
+                    {user?.publicMetadata.zipcode as string}
+                  </span>
+                </p>
+                <p className='flex items-center gap-2 text-muted-foreground'>
+                  Street:{" "}
+                  <span className='text-primary'>
+                    {user?.publicMetadata.street as string}
+                  </span>
+                </p>
+                <p className='flex items-center gap-2 text-muted-foreground'>
+                  Phone:{" "}
+                  <span className='text-primary'>
+                    {user?.publicMetadata.phone as string}
+                  </span>
+                </p>
+              </>
+            ) : (
+              <p className='flex items-center gap-2 text-muted-foreground'>
+                No shipping address found
+              </p>
+            )}
           </div>
-          <div className='flex items-center justify-between'>
-            <span>Shipping</span>
-            <span>${shipping}</span>
+          <hr />
+          <div>
+            <h2 className='text-xl uppercase'>Payment Method</h2>
+            <p className='flex items-center gap-2 text-muted-foreground'>
+              Payment Method: <span className='text-primary'></span>
+            </p>
           </div>
-          <div className='flex items-center justify-between'>
-            <span>Including tax ({taxRate}%)</span>
-            <span>${(((total()+shipping)*taxRate)/(100+taxRate)).toFixed(2)}</span>
-          </div>
-          <div className='flex items-center justify-between text-xl font-semibold'>
-            <span>Total</span>
-            <span>${((total() + shipping).toFixed(2))}</span>
+          <hr />
+          <div>
+            <div className='flex items-center justify-between '>
+              <span>Subtotal</span>
+              <span>${total().toFixed(2)}</span>
+            </div>
+            <div className='flex items-center justify-between'>
+              <span>Shipping</span>
+              <span>${shipping}</span>
+            </div>
+            <div className='flex items-center justify-between'>
+              <span>Including tax ({taxRate}%)</span>
+              <span>
+                $
+                {(((total() + shipping) * taxRate) / (100 + taxRate)).toFixed(
+                  2
+                )}
+              </span>
+            </div>
+            <div className='flex items-center justify-between text-xl font-semibold'>
+              <span>Total</span>
+              <span>${(total() + shipping).toFixed(2)}</span>
+            </div>
           </div>
         </div>
       </div>

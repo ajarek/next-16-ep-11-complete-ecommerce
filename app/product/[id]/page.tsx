@@ -1,3 +1,5 @@
+
+'use client'
 import Image from "next/image"
 import { Products } from "@/data/data.js"
 import { Button } from "@/components/ui/button"
@@ -5,11 +7,12 @@ import Link from "next/link"
 import ProductCard from "@/components/ProductCard"
 import ButtonAddCart from "@/components/ButtonAddCart"
 import { ShoppingCart } from "lucide-react"
+import { use, useState } from "react"
 
-const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params
+const ProductPage = ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = use(params)
   const product = Products.find((product) => product._id === id)
-  const quantity = 1
+  const [quantity, setQuantity] = useState(1)
   if (!product) {
     return <div>Product not found</div>
   }
@@ -46,6 +49,12 @@ const ProductPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             <p className='text-primary text-xl font-semibold '>
               ${(product?.offerPrice).toFixed(2)}
             </p>
+          </div>
+          {/*add counter*/}
+          <div className='flex items-center gap-2'>
+            <Button size={'icon'} onClick={() => setQuantity(quantity > 1 ? quantity - 1 : quantity)} className='bg-primary text-white  rounded-xl hover:bg-primary/80 transition-colors cursor-pointer'>-</Button>
+            <p className="w-9 h-9 flex items-center justify-center rounded-xl border border-primary">{quantity}</p>
+            <Button size={'icon'} onClick={() => setQuantity(quantity + 1)} className='bg-primary text-white  rounded-xl hover:bg-primary/80 transition-colors cursor-pointer'>+</Button>
           </div>
           <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4'>
             <Button

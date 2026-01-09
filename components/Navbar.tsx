@@ -13,6 +13,7 @@ import { Button } from "./ui/button"
 import { auth } from "@clerk/nextjs/server"
 import MobileNavbar from "./MobileNavbar"
 import LengthCart from "./LengthCart"
+import ButtonCleanCart from "./ButtonCleanCart"
 
 
 const Navbar = async () => {
@@ -69,6 +70,7 @@ const Navbar = async () => {
               <UserRoundPen className='w-5 h-5 ' />
             </Button>
           </SignUpButton>
+          <ButtonCleanCart />
         </SignedOut>
         <SignedIn>
           <UserButton />
