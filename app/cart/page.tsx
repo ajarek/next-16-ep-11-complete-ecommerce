@@ -165,9 +165,16 @@ const Cart = () => {
                 </p>
               </>
             ) : (
-              <p className='flex items-center gap-2 text-muted-foreground'>
-                No shipping address found
-              </p>
+              <div className='flex items-center gap-2 text-muted-foreground'>
+                <p>No shipping address found</p>
+                <Button
+                asChild
+                  variant='outline'
+                  className='cursor-pointer rounded-xl'
+                >
+                  <Link href='/profile' className='text-primary hover:text-primary/80 transition-colors'>Add Address</Link>
+                </Button>
+              </div>
             )}
           </div>
           <hr />
