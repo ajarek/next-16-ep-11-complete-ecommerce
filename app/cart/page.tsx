@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { Minus, Plus, Trash2, Undo2 } from "lucide-react"
+import { Minus, Plus, Trash2, Undo2, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { useUser } from "@clerk/nextjs"
 import {
@@ -25,13 +25,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { toast } from "sonner"
 
 const taxRate = 23
 const shipping = 5
 
 const Cart = () => {
   const { user } = useUser()
-  const [paymentMethod, setPaymentMethod] = useState<string>("cash")
+
+  const [loading, setLoading] = useState(false)
+  const [paymentMethod, setPaymentMethod] = useState<string>("Cash")
   const {
     items: storeItems,
     removeItemFromCart,
@@ -48,6 +51,50 @@ const Cart = () => {
 
   const items = isClient ? storeItems : []
   const total = () => (isClient ? storeTotal() : 0)
+
+  const handleCheckout = async () => {
+    if (items.length === 0) {
+      return toast.error("Cart is empty")
+    }
+
+    if (paymentMethod !== "Card") {
+      return toast.info(
+        "Only Card payment is integrated with Stripe Checkout for now."
+      )
+    }
+
+    try {
+      setLoading(true)
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          items,
+          email: user?.primaryEmailAddress?.emailAddress,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        window.location.href = data.url
+      } else {
+        console.error("Checkout error:", data)
+        toast.error(
+          `Checkout failed: ${
+            data.details?.message || data.error || "Unknown error"
+          }`
+        )
+      }
+    } catch (error) {
+      console.error(error)
+      toast.error("Something went wrong. Check console for details.")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className=' min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-8 max-sm:px-4 gap-8 '>
@@ -192,7 +239,7 @@ const Cart = () => {
           <hr />
           <div>
             <h2 className='text-xl uppercase'>Payment Method</h2>
-            <Select onValueChange={setPaymentMethod}>
+            <Select onValueChange={setPaymentMethod} defaultValue='Cash'>
               <SelectTrigger className='w-[180px]'>
                 <SelectValue placeholder='Select payment method' />
               </SelectTrigger>
@@ -229,7 +276,14 @@ const Cart = () => {
             <div>
               <p>Payment Method: {paymentMethod}</p>
             </div>
-            <Button className='w-full mt-6'>Checkout</Button>
+            <Button
+              className='w-full mt-6'
+              onClick={handleCheckout}
+              disabled={loading || items.length === 0}
+            >
+              {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+              Checkout
+            </Button>
           </div>
         </div>
       </div>
