@@ -15,7 +15,7 @@ const MobileNavbar = ({ isAuthenticated }: MobileNavbarProps) => {
   const toggle = () => setOpen(!open)
 
   return (
-    <div className='sm:hidden'>
+    <div className='lg:hidden'>
       <Button
         variant='ghost'
         size='icon'

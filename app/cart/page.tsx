@@ -1,6 +1,6 @@
 "use client"
 
-import { useSyncExternalStore } from "react"
+import { useState, useSyncExternalStore } from "react"
 
 import { useCartStore } from "@/store/cartStore"
 import LengthCart from "@/components/LengthCart"
@@ -18,13 +18,20 @@ import { Button } from "@/components/ui/button"
 import { Minus, Plus, Trash2, Undo2 } from "lucide-react"
 import Link from "next/link"
 import { useUser } from "@clerk/nextjs"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const taxRate = 23
 const shipping = 5
 
 const Cart = () => {
   const { user } = useUser()
-
+  const [paymentMethod, setPaymentMethod] = useState<string>("cash")
   const {
     items: storeItems,
     removeItemFromCart,
@@ -44,8 +51,8 @@ const Cart = () => {
 
   return (
     <div className=' min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-8 max-sm:px-4 gap-8 '>
-      <div className='w-full h-[calc(100vh-4rem)] grid grid-cols-1 md:grid-cols-[2fr_1fr] place-items-center gap-8 border-4'>
-        <div className='w-full h-full border-4 p-4 border-red-500'>
+      <div className='w-full min-h-[calc(100vh-4rem)] grid grid-cols-1 lg:grid-cols-[2fr_1fr] place-items-center gap-8 border-4'>
+        <div className='w-full h-full border-4 p-4 border-primary'>
           <div className='flex items-center gap-4 '>
             <h1 className='text-2xl font-semibold'>Shopping Cart</h1>
             <LengthCart />
@@ -122,7 +129,7 @@ const Cart = () => {
             </TableBody>
           </Table>
         </div>
-        <div className='w-full h-full border-4 p-4 border-green-500 flex flex-col gap-4'>
+        <div className='w-full h-full border-4 p-4 border-secondary flex flex-col gap-4'>
           <h1 className='text-2xl font-semibold'>Order Summary</h1>
           <div>
             <h2 className='text-xl uppercase'>Shipping Address</h2>
@@ -168,11 +175,16 @@ const Cart = () => {
               <div className='flex items-center gap-2 text-muted-foreground'>
                 <p>No shipping address found</p>
                 <Button
-                asChild
+                  asChild
                   variant='outline'
                   className='cursor-pointer rounded-xl'
                 >
-                  <Link href='/profile' className='text-primary hover:text-primary/80 transition-colors'>Add Address</Link>
+                  <Link
+                    href='/profile'
+                    className='text-primary hover:text-primary/80 transition-colors'
+                  >
+                    Add Address
+                  </Link>
                 </Button>
               </div>
             )}
@@ -180,9 +192,16 @@ const Cart = () => {
           <hr />
           <div>
             <h2 className='text-xl uppercase'>Payment Method</h2>
-            <p className='flex items-center gap-2 text-muted-foreground'>
-              Payment Method: <span className='text-primary'></span>
-            </p>
+            <Select onValueChange={setPaymentMethod}>
+              <SelectTrigger className='w-[180px]'>
+                <SelectValue placeholder='Select payment method' />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value='Cash'>Cash on delivery</SelectItem>
+                <SelectItem value='Card'>Card</SelectItem>
+                <SelectItem value='PayPal'>PayPal</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <hr />
           <div>
@@ -207,6 +226,10 @@ const Cart = () => {
               <span>Total</span>
               <span>${(total() + shipping).toFixed(2)}</span>
             </div>
+            <div>
+              <p>Payment Method: {paymentMethod}</p>
+            </div>
+            <Button className='w-full mt-6'>Checkout</Button>
           </div>
         </div>
       </div>
