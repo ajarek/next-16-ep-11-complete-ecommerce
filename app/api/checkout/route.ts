@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: "payment",
-      success_url: `${process.env.NEXT_PUBLIC_URL}/cart?success=1`,
+      success_url: `${process.env.NEXT_PUBLIC_URL}/success`,
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/cart?canceled=1`,
       customer_email: email, // Optional: Pre-fill customer email if available
       // metadata: {

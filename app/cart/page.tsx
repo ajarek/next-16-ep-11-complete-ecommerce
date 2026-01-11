@@ -53,6 +53,22 @@ const Cart = () => {
   const total = () => (isClient ? storeTotal() : 0)
 
   const handleCheckout = async () => {
+    if (!user) {
+      return toast.error("Please log in to proceed to checkout")
+    }
+
+    if (
+      !user.publicMetadata.street ||
+      !user.publicMetadata.city ||
+      !user.publicMetadata.country ||
+      !user.publicMetadata.zipcode ||
+      !user.publicMetadata.phone
+    ) {
+      return toast.error(
+        "Please complete your shipping address in specific profile page"
+      )
+    }
+
     if (items.length === 0) {
       return toast.error("Cart is empty")
     }
