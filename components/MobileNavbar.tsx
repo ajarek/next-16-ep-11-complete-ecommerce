@@ -4,12 +4,14 @@ import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { Button } from "./ui/button"
+import { User } from "@/types/typeUsers"
 
 interface MobileNavbarProps {
   isAuthenticated: boolean
+  user: User | null
 }
 
-const MobileNavbar = ({ isAuthenticated }: MobileNavbarProps) => {
+const MobileNavbar = ({ isAuthenticated, user }: MobileNavbarProps) => {
   const [open, setOpen] = useState(false)
 
   const toggle = () => setOpen(!open)
@@ -47,9 +49,9 @@ const MobileNavbar = ({ isAuthenticated }: MobileNavbarProps) => {
           Contact
         </Link>
 
-        {isAuthenticated && (
+         {isAuthenticated && user?.publicMetadata.role === "seller" && (
           <Link
-            href='/dashboard'
+            href='/seller'
             className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
           >
             Seller
