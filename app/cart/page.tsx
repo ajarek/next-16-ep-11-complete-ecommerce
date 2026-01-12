@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "sonner"
+import { addShoppingList } from "@/lib/action"
 
 const taxRate = 23
 const shipping = 5
@@ -104,6 +105,13 @@ const Cart = () => {
           }`
         )
       }
+      await addShoppingList({
+        username: user.id,
+        productId: items.map((item) => item._id),
+        quantity: items.map((item) => item.quantity ?? 1),
+        total: items.map((item) => item.offerPrice),
+        method: paymentMethod,
+      })
     } catch (error) {
       console.error(error)
       toast.error("Something went wrong. Check console for details.")
@@ -293,7 +301,7 @@ const Cart = () => {
               <p>Payment Method: {paymentMethod}</p>
             </div>
             <Button
-              className='w-full mt-6'
+              className='w-full mt-6 cursor-pointer'
               onClick={handleCheckout}
               disabled={loading || items.length === 0}
             >

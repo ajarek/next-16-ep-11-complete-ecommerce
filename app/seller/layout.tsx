@@ -15,17 +15,17 @@ import Link from "next/link"
 const items = [
   {
     title: "Products List",
-    url: "#",
+    url: "/seller",
     icon: ClipboardList,
   },
   {
     title: "Order List",
-    url: "#",
+    url: "/seller/order",
     icon: ListOrdered,
   },
   {
     title: "Users List",
-    url: "#",
+    url: "/seller/users",
     icon: SquareChartGantt,
   }
 ]
