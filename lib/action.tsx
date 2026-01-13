@@ -1,26 +1,28 @@
 "use server"
 
 import connectToDb from "./connectToDb"
-import {ShoppingList } from "./models"
+import { ShoppingList } from "./models"
 import { revalidatePath } from "next/cache"
 
 import { redirect } from "next/navigation"
 
-export const addShoppingList = async (formData:ShoppingList) => {
-  const { username, productId, quantity, total, method } = formData
+export const addShoppingList = async (formData: ShoppingList) => {
+  const { username, productId, images, name, quantity, total, method } =
+    formData
   try {
     await connectToDb()
     const newShoppingList = new ShoppingList({
-     username,
-     productId,
-     quantity,
-     total,
-     method,
+      username,
+      productId,
+      images,
+      name,
+      quantity,
+      total,
+      method,
     })
     await newShoppingList.save()
     console.log("saved" + newShoppingList)
     revalidatePath("/seller/order")
-    
   } catch (err) {
     console.log(err)
   }

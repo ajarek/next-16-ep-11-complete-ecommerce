@@ -108,9 +108,11 @@ const Cart = () => {
       await addShoppingList({
         username: user.id,
         productId: items.map((item) => item._id),
+        images: items.map((item) => item.images[0]),
+        name: items.map((item) => item.name),
         quantity: items.map((item) => item.quantity ?? 1),
-        total: items.map((item) => item.offerPrice),
-        method: paymentMethod,
+        total: items.map((item) => item.offerPrice * (item.quantity ?? 1)),
+        method: items.map(() => paymentMethod),
       })
     } catch (error) {
       console.error(error)
