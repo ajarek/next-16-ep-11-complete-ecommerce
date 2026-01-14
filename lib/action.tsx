@@ -37,6 +37,15 @@ export const getShoppingList = async (username: string) => {
     console.log(err)
   }
 }
+export const getShoppingAll = async () => {
+  try {
+    await connectToDb()
+    const shoppingList = await ShoppingList.find()
+    return JSON.parse(JSON.stringify(shoppingList))
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 export const removeFromShoppingList = async (Id: string) => {
   try {
@@ -48,3 +57,5 @@ export const removeFromShoppingList = async (Id: string) => {
     console.log(err)
   }
 }
+
+

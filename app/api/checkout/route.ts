@@ -43,6 +43,18 @@ export async function POST(req: Request) {
       phone_number_collection: {
         enabled: true,
       },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 500,
+              currency: "usd",
+            },
+            display_name: "Delivery",
+          },
+        },
+      ],
     })
 
     return NextResponse.json(

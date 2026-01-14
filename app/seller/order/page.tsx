@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server"
 import type { ShoppingList } from "@/lib/models"
-import { getShoppingList } from "@/lib/action"
+import { getShoppingAll } from "@/lib/action"
 
 import {
   Table,
@@ -19,8 +19,7 @@ const shipping = 5
 
 const OrderList = async () => {
   const user = await currentUser()
-  const shoppingList = await getShoppingList(user?.id || "")
-  console.log(user)
+  const shoppingList = await getShoppingAll()
 
   return (
     <div className='w-full flex flex-col gap-4'>

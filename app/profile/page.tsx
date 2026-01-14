@@ -59,7 +59,7 @@ const ProfileAddressForm = () => {
   })
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data)
+    
     try {
       const response = await fetch("/api/clerk", {
         method: "POST",
