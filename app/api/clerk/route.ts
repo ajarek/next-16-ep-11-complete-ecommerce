@@ -12,7 +12,6 @@ export async function POST(req: Request) {
 
   await client.users.updateUserMetadata(userId, {
     publicMetadata: data,
-    
   })
 
   return NextResponse.json({ success: "Address updated" })

@@ -1,5 +1,5 @@
+"use client"
 
-'use client'
 import Image from "next/image"
 import { Products } from "@/data/data.js"
 import { Button } from "@/components/ui/button"
@@ -52,19 +52,35 @@ const ProductPage = ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
           {/*add counter*/}
           <div className='flex items-center gap-2'>
-            <Button size={'icon'} onClick={() => setQuantity(quantity > 1 ? quantity - 1 : quantity)} className='bg-primary text-white  rounded-xl hover:bg-primary/80 transition-colors cursor-pointer'>-</Button>
-            <p className="w-9 h-9 flex items-center justify-center rounded-xl border border-primary">{quantity}</p>
-            <Button size={'icon'} onClick={() => setQuantity(quantity + 1)} className='bg-primary text-white  rounded-xl hover:bg-primary/80 transition-colors cursor-pointer'>+</Button>
+            <Button
+              size={"icon"}
+              onClick={() =>
+                setQuantity(quantity > 1 ? quantity - 1 : quantity)
+              }
+              className='bg-primary text-white  rounded-xl hover:bg-primary/80 transition-colors cursor-pointer'
+            >
+              -
+            </Button>
+            <p className='w-9 h-9 flex items-center justify-center rounded-xl border border-primary'>
+              {quantity}
+            </p>
+            <Button
+              size={"icon"}
+              onClick={() => setQuantity(quantity + 1)}
+              className='bg-primary text-white  rounded-xl hover:bg-primary/80 transition-colors cursor-pointer'
+            >
+              +
+            </Button>
           </div>
           <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4'>
             <Button
               asChild
               className='bg-primary text-white px-4 py-2 rounded-xl hover:bg-primary/80 transition-colors cursor-pointer '
-            > 
-            <div className="flex items-center gap-2">
-            <ShoppingCart className='w-4 h-4' />
-              <Link href='/collections'>Buy Now</Link>
-            </div>
+            >
+              <div className='flex items-center gap-2'>
+                <ShoppingCart className='w-4 h-4' />
+                <Link href='/collections'>Buy Now</Link>
+              </div>
             </Button>
             <ButtonAddCart product={{ ...product, quantity }} />
           </div>

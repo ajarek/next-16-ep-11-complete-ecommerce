@@ -27,37 +27,36 @@ const items = [
     title: "Users List",
     url: "/seller/users",
     icon: SquareChartGantt,
-  }
+  },
 ]
 
 const SellerLayout = ({ children }: { children: React.ReactNode }) => {
-    return (
+  return (
     <SidebarProvider>
-   
-       <Sidebar>
-      <SidebarContent className="py-8 ">
-        <SidebarGroup>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link href={item.url}>
-                      <item.icon className="w-6 h-6" />
-                      <span className="text-xl">{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+      <Sidebar>
+        <SidebarContent className='py-8 '>
+          <SidebarGroup>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {items.map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <Link href={item.url}>
+                        <item.icon className='w-6 h-6' />
+                        <span className='text-xl'>{item.title}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
       <SidebarTrigger />
-    {children}
+      {children}
     </SidebarProvider>
-    );
+  )
 }
 
-export default SellerLayout;
+export default SellerLayout

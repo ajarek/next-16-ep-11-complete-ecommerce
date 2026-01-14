@@ -16,7 +16,9 @@ export default function NotFound() {
           />
         </div>
 
-        <h1 className='text-4xl font-serif text-primary mt-4'>Page not found!</h1>
+        <h1 className='text-4xl font-serif text-primary mt-4'>
+          Page not found!
+        </h1>
 
         <p className='max-w-xl text-muted-foreground'>
           It looks like this page is not available or the address is incorrect.
@@ -25,7 +27,7 @@ export default function NotFound() {
 
         <div className='flex gap-3'>
           <Link href='/'>
-            <Button className="rounded-xl">Return to the home page</Button>
+            <Button className='rounded-xl'>Return to the home page</Button>
           </Link>
         </div>
 

@@ -58,14 +58,15 @@ const Navbar = async () => {
           Contact
         </Link>
 
-        {isAuthenticated && serializedUser?.publicMetadata.role === "seller" && (
-          <Link
-            href='/seller'
-            className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
-          >
-            Seller
-          </Link>
-        )}
+        {isAuthenticated &&
+          serializedUser?.publicMetadata.role === "seller" && (
+            <Link
+              href='/seller'
+              className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
+            >
+              Seller
+            </Link>
+          )}
       </div>
       <div className='flex items-center gap-8 '>
         <MobileNavbar

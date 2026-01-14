@@ -25,7 +25,7 @@ const CollectionPage = () => {
       <p className='w-full sm:max-w-xl text-muted-foreground'>
         Explore our collection of unique and handcrafted products.
       </p>
-      <div className="w-full flex flex-wrap items-center gap-4">
+      <div className='w-full flex flex-wrap items-center gap-4'>
         <div className='flex flex-wrap items-center gap-2'>
           <Button
             onClick={() => setSelectedCategory("All")}

@@ -30,34 +30,34 @@ const MobileNavbar = ({ isAuthenticated, user }: MobileNavbarProps) => {
       {open && (
         <div className='fixed inset-0 z-40 bg-background/95 backdrop-blur-sm flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in-95 duration-200'>
           <nav className='flex flex-col items-center gap-8 text-center'>
-              <Link
-          href='/'
-          className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
-        >
-          Home
-        </Link>
-        <Link
-          href='/collections'
-          className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
-        >
-          Collections
-        </Link>
-        <Link
-          href='/contact'
-          className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
-        >
-          Contact
-        </Link>
+            <Link
+              href='/'
+              className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
+            >
+              Home
+            </Link>
+            <Link
+              href='/collections'
+              className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
+            >
+              Collections
+            </Link>
+            <Link
+              href='/contact'
+              className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
+            >
+              Contact
+            </Link>
 
-         {isAuthenticated && user?.publicMetadata.role === "seller" && (
-          <Link
-            href='/seller'
-            className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
-          >
-            Seller
-          </Link>
-        )}
-      </nav>
+            {isAuthenticated && user?.publicMetadata.role === "seller" && (
+              <Link
+                href='/seller'
+                className='text-xl hover:text-primary focus:text-primary focus:underline focus:underline-offset-8'
+              >
+                Seller
+              </Link>
+            )}
+          </nav>
         </div>
       )}
     </div>

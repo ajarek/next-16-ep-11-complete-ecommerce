@@ -57,5 +57,3 @@ export const removeFromShoppingList = async (Id: string) => {
     console.log(err)
   }
 }
-
-

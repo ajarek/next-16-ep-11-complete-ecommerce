@@ -11,9 +11,9 @@ const SuccessPage = () => {
   const removeAllFromCart = useCartStore((state) => state.removeAllFromCart)
   const searchParams = useSearchParams()
 
-  // Check if we arrived here from a payment flow if needed, but for now we assume
-  // access to this page implies success or we can just clear it.
-  // Ideally we might want to check a session_id, but clearing on mount is the requested behavior.
+  // W razie potrzeby sprawdź, czy dotarliśmy tutaj z przepływu płatności, ale na razie zakładamy, że
+  // dostęp do tej strony oznacza powodzenie lub możemy ją po prostu wyczyścić.
+  // Najlepiej byłoby sprawdzić session_id, ale żądanym zachowaniem jest czyszczenie podczas montowania.
 
   useEffect(() => {
     removeAllFromCart()

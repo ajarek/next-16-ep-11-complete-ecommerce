@@ -17,17 +17,17 @@ const ProductCard = ({ product }: { product: Product }) => {
     <Card className='w-full pt-0 rounded-t-2xl overflow-hidden shadow-xl'>
       <CardHeader className='w-full px-0 '>
         <div className='w-full flex items-center justify-center '>
-        <Image
-          src={
-            product.images && product.images[0]
-              ? product.images[0]
-              : "/images/not-found.png"
-          }
-          alt={product.name}
-          width={333}
-          height={399}
-          className='w-full rounded-t-2xl'
-        />
+          <Image
+            src={
+              product.images && product.images[0]
+                ? product.images[0]
+                : "/images/not-found.png"
+            }
+            alt={product.name}
+            width={333}
+            height={399}
+            className='w-full rounded-t-2xl'
+          />
         </div>
         <CardTitle className='px-4 '>
           <span className='text-sm text-muted-foreground'>

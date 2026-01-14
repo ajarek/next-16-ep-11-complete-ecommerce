@@ -22,9 +22,9 @@ export async function POST(req: Request) {
         currency: "usd",
         product_data: {
           name: item.name,
-          // Only send images if they are valid URLs. Stripe requires valid public URLs.
-          // If you are testing locally with localhost images, Stripe server cannot see them.
-          // We can either filter them or send no images for local dev if they are not public.
+          // Wysyłaj obrazy tylko wtedy, gdy są to prawidłowe adresy URL. Stripe wymaga prawidłowych publicznych adresów URL.
+          // Jeśli testujesz lokalnie z obrazami z lokalnego hosta, serwer Stripe ich nie widzi.
+          // Możemy je filtrować lub nie wysyłać żadnych obrazów do lokalnego środowiska programistycznego, jeśli nie są publiczne.
           images: item.images.filter((img) => img.startsWith("http")),
         },
         unit_amount: Math.round(item.offerPrice * 100),
@@ -36,9 +36,9 @@ export async function POST(req: Request) {
       mode: "payment",
       success_url: `${process.env.NEXT_PUBLIC_URL}/success`,
       cancel_url: `${process.env.NEXT_PUBLIC_URL}/cart?canceled=1`,
-      customer_email: email, // Optional: Pre-fill customer email if available
-      // metadata: {
-      //   orderId: "123456", // Example
+      customer_email: email, // Opcjonalnie: Wstępnie wypełnij adres e-mail klienta, jeśli jest dostępny
+      // metadane: {
+      // orderId: "123456", // Przykład
       // },
       phone_number_collection: {
         enabled: true,

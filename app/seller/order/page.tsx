@@ -12,8 +12,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Phone, Trash2 } from "lucide-react"
+import { Phone } from "lucide-react"
+import ButtonDeleteShoppingList from "@/components/ButtonDeleteWatchlist"
 
 const shipping = 5
 
@@ -40,10 +40,7 @@ const OrderList = async () => {
         <TableBody>
           {shoppingList.map((item: ShoppingList) =>
             item.name.map((name: string, index: number) => (
-              <TableRow
-                key={`${item._id?.toString()}-${index}`}
-                className=''
-              >
+              <TableRow key={`${item._id?.toString()}-${index}`} className=''>
                 <TableCell className='font-medium'>
                   <div className='flex flex-col items-start gap-4'>
                     <Image
@@ -60,7 +57,9 @@ const OrderList = async () => {
                 {index === 0 && (
                   <TableCell rowSpan={item.name.length}>
                     $
-                    {item.total.reduce((acc, curr) => acc + curr, 0) + shipping}
+                    {(
+                      item.total.reduce((acc, curr) => acc + curr, 0) + shipping
+                    ).toFixed(2)}
                   </TableCell>
                 )}
 
@@ -92,12 +91,7 @@ const OrderList = async () => {
                 )}
                 {index === 0 && (
                   <TableCell rowSpan={item.name.length}>
-                    <Button
-                      variant='ghost'
-                      className='cursor-pointer rounded-xl'
-                    >
-                      <Trash2 className='w-5 h-5 ' />
-                    </Button>
+                    <ButtonDeleteShoppingList Id={item._id?.toString() || ""} />
                   </TableCell>
                 )}
               </TableRow>

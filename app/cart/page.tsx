@@ -43,7 +43,7 @@ const Cart = () => {
     decrement,
     total: storeTotal,
   } = useCartStore()
-  //This correctly identifies the client environment without triggering the "setState in effect" warning and is the recommended React 18+ approach for handling store environment synchronization.
+  //Dzięki temu środowisko klienta jest poprawnie identyfikowane i nie pojawia się ostrzeżenie „setState in effect” (stan ustawiony na wartość) i jest to zalecane podejście React 18+ do obsługi synchronizacji środowiska sklepu.
   const isClient = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -204,113 +204,122 @@ const Cart = () => {
         </div>
         <div className='w-full h-full border-4 p-4 border-secondary flex flex-col gap-4'>
           <h1 className='text-2xl font-semibold'>Order Summary</h1>
-          <div>
-            <h2 className='text-xl uppercase'>Shipping Address</h2>
-            {user?.publicMetadata.country ||
-            user?.publicMetadata.city ||
-            user?.publicMetadata.zipcode ||
-            user?.publicMetadata.street ||
-            user?.publicMetadata.phone ? (
-              <>
-                <p className='flex items-center gap-2 text-muted-foreground'>
-                  Country:{" "}
-                  <span className='text-primary'>
-                    {user?.publicMetadata.country as string}
-                  </span>
-                </p>
+          {storeItems.length === 0 ? (
+            <p className='text-center text-muted-foreground'>
+              Your cart is empty
+            </p>
+          ) : (
+            <div className='w-full h-full flex flex-col gap-4'>
+              <div>
+                <h2 className='text-xl uppercase'>Shipping Address</h2>
+                {user?.publicMetadata.country ||
+                user?.publicMetadata.city ||
+                user?.publicMetadata.zipcode ||
+                user?.publicMetadata.street ||
+                user?.publicMetadata.phone ? (
+                  <>
+                    <p className='flex items-center gap-2 text-muted-foreground'>
+                      Country:{" "}
+                      <span className='text-primary'>
+                        {user?.publicMetadata.country as string}
+                      </span>
+                    </p>
 
-                <p className='flex items-center gap-2 text-muted-foreground'>
-                  City:{" "}
-                  <span className='text-primary'>
-                    {user?.publicMetadata.city as string}
+                    <p className='flex items-center gap-2 text-muted-foreground'>
+                      City:{" "}
+                      <span className='text-primary'>
+                        {user?.publicMetadata.city as string}
+                      </span>
+                    </p>
+                    <p className='flex items-center gap-2 text-muted-foreground'>
+                      Zipcode:{" "}
+                      <span className='text-primary'>
+                        {user?.publicMetadata.zipcode as string}
+                      </span>
+                    </p>
+                    <p className='flex items-center gap-2 text-muted-foreground'>
+                      Street:{" "}
+                      <span className='text-primary'>
+                        {user?.publicMetadata.street as string}
+                      </span>
+                    </p>
+                    <p className='flex items-center gap-2 text-muted-foreground'>
+                      Phone:{" "}
+                      <span className='text-primary'>
+                        {user?.publicMetadata.phone as string}
+                      </span>
+                    </p>
+                  </>
+                ) : (
+                  <div className='flex items-center gap-2 text-muted-foreground'>
+                    <p>No shipping address found</p>
+                    <Button
+                      asChild
+                      variant='outline'
+                      className='cursor-pointer rounded-xl'
+                    >
+                      <Link
+                        href='/profile'
+                        className='text-primary hover:text-primary/80 transition-colors'
+                      >
+                        Add Address
+                      </Link>
+                    </Button>
+                  </div>
+                )}
+              </div>
+              <hr />
+              <div>
+                <h2 className='text-xl uppercase'>Payment Method</h2>
+                <Select onValueChange={setPaymentMethod} defaultValue='Cash'>
+                  <SelectTrigger className='w-[180px]'>
+                    <SelectValue placeholder='Select payment method' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value='Cash'>Cash on delivery</SelectItem>
+                    <SelectItem value='Card'>Card</SelectItem>
+                    <SelectItem value='PayPal'>PayPal</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <hr />
+              <div>
+                <div className='flex items-center justify-between '>
+                  <span>Subtotal</span>
+                  <span>${total().toFixed(2)}</span>
+                </div>
+                <div className='flex items-center justify-between'>
+                  <span>Shipping</span>
+                  <span>${shipping}</span>
+                </div>
+                <div className='flex items-center justify-between'>
+                  <span>Including tax ({taxRate}%)</span>
+                  <span>
+                    $
+                    {(
+                      ((total() + shipping) * taxRate) /
+                      (100 + taxRate)
+                    ).toFixed(2)}
                   </span>
-                </p>
-                <p className='flex items-center gap-2 text-muted-foreground'>
-                  Zipcode:{" "}
-                  <span className='text-primary'>
-                    {user?.publicMetadata.zipcode as string}
-                  </span>
-                </p>
-                <p className='flex items-center gap-2 text-muted-foreground'>
-                  Street:{" "}
-                  <span className='text-primary'>
-                    {user?.publicMetadata.street as string}
-                  </span>
-                </p>
-                <p className='flex items-center gap-2 text-muted-foreground'>
-                  Phone:{" "}
-                  <span className='text-primary'>
-                    {user?.publicMetadata.phone as string}
-                  </span>
-                </p>
-              </>
-            ) : (
-              <div className='flex items-center gap-2 text-muted-foreground'>
-                <p>No shipping address found</p>
+                </div>
+                <div className='flex items-center justify-between text-xl font-semibold'>
+                  <span>Total</span>
+                  <span>${(total() + shipping).toFixed(2)}</span>
+                </div>
+                <div>
+                  <p>Payment Method: {paymentMethod}</p>
+                </div>
                 <Button
-                  asChild
-                  variant='outline'
-                  className='cursor-pointer rounded-xl'
+                  className='w-full mt-6 cursor-pointer'
+                  onClick={handleCheckout}
+                  disabled={loading || items.length === 0}
                 >
-                  <Link
-                    href='/profile'
-                    className='text-primary hover:text-primary/80 transition-colors'
-                  >
-                    Add Address
-                  </Link>
+                  {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+                  Checkout
                 </Button>
               </div>
-            )}
-          </div>
-          <hr />
-          <div>
-            <h2 className='text-xl uppercase'>Payment Method</h2>
-            <Select onValueChange={setPaymentMethod} defaultValue='Cash'>
-              <SelectTrigger className='w-[180px]'>
-                <SelectValue placeholder='Select payment method' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='Cash'>Cash on delivery</SelectItem>
-                <SelectItem value='Card'>Card</SelectItem>
-                <SelectItem value='PayPal'>PayPal</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <hr />
-          <div>
-            <div className='flex items-center justify-between '>
-              <span>Subtotal</span>
-              <span>${total().toFixed(2)}</span>
             </div>
-            <div className='flex items-center justify-between'>
-              <span>Shipping</span>
-              <span>${shipping}</span>
-            </div>
-            <div className='flex items-center justify-between'>
-              <span>Including tax ({taxRate}%)</span>
-              <span>
-                $
-                {(((total() + shipping) * taxRate) / (100 + taxRate)).toFixed(
-                  2
-                )}
-              </span>
-            </div>
-            <div className='flex items-center justify-between text-xl font-semibold'>
-              <span>Total</span>
-              <span>${(total() + shipping).toFixed(2)}</span>
-            </div>
-            <div>
-              <p>Payment Method: {paymentMethod}</p>
-            </div>
-            <Button
-              className='w-full mt-6 cursor-pointer'
-              onClick={handleCheckout}
-              disabled={loading || items.length === 0}
-            >
-              {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-              Checkout
-            </Button>
-          </div>
+          )}
         </div>
       </div>
     </div>

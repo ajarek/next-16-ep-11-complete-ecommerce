@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/table"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Trash2 } from "lucide-react"
 import { Products as items } from "@/data/data.js"
 import { useState } from "react"
 
@@ -23,6 +22,8 @@ const SellerPage = () => {
       return a.name.localeCompare(b.name)
     } else if (sortOrder === "category") {
       return a.category.localeCompare(b.category)
+    } else if (sortOrder === "subcategory") {
+      return a.subCategory.localeCompare(b.subCategory)
     } else if (sortOrder === "subtotal") {
       return a.offerPrice - b.offerPrice
     } else if (sortOrder === "action") {
@@ -31,8 +32,8 @@ const SellerPage = () => {
     return 0
   })
   return (
-    <div className='min-h-[calc(100vh-4rem)] w-full flex flex-col items-center justify-start  '>
-      <h1>All Products</h1>
+    <div className='min-h-[calc(100vh-4rem)] w-full flex flex-col items-start justify-start  '>
+      <h1 className='text-2xl font-bold'>All Products</h1>
       <Table>
         <TableHeader>
           <TableRow>
@@ -58,6 +59,15 @@ const SellerPage = () => {
               <Button
                 variant='ghost'
                 className='cursor-pointer hover:bg-transparent'
+                onClick={() => setSortOrder("subcategory")}
+              >
+                Subcategory
+              </Button>
+            </TableHead>
+            <TableHead>
+              <Button
+                variant='ghost'
+                className='cursor-pointer hover:bg-transparent'
                 onClick={() => setSortOrder("subtotal")}
               >
                 Subtotal
@@ -72,7 +82,6 @@ const SellerPage = () => {
                 Price
               </Button>
             </TableHead>
-            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -91,15 +100,10 @@ const SellerPage = () => {
                 </div>
               </TableCell>
               <TableCell className=''>{item.category}</TableCell>
+              <TableCell>{item.subCategory}</TableCell>
               <TableCell>${item.offerPrice.toFixed(2)}</TableCell>
 
               <TableCell>${item.price.toFixed(2)}</TableCell>
-
-              <TableCell>
-                <Button variant='ghost' className='cursor-pointer rounded-xl'>
-                  <Trash2 className='w-5 h-5 ' />
-                </Button>
-              </TableCell>
             </TableRow>
           ))}
         </TableBody>
